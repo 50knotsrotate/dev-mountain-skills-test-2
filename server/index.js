@@ -13,6 +13,8 @@ massive(process.env.CONNECTION_URI)
         console.log(err)
     })
 
+    app.get('/api/inventory', controller.getInventory)
+
 const PORT = 4000;
 app.listen(PORT, () => { 
     console.log(`Server has started on port ${PORT}`)

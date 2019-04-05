@@ -6,16 +6,39 @@ import Form from './Components/Form/Form'
 import Header from './Components/Header/Header'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        
-        <Dashboard />
-        <Form />
-        <Header />
-      </div>
-    );
+ 
+    constructor(){ 
+      super()
+
+      this.state = {
+        inventory: []
+      }
+    }
+  
+  submit = item => { 
+    console.log(item)
+    let newInventory = [...this.state.inventory, item]
+    this.setState({
+      inventory: newInventory
+    })
   }
-}
+    render(){
+      return (
+        <div className="App">
+        
+          <Header />
+          <div className = 'dashboard-form'>
+            <Dashboard
+              inventory={this.state.inventory}
+            />
+          <Form
+            submitItem={this.submit}
+            />
+            </div>
+        </div>
+      );
+    }
+  }
+
 
 export default App;

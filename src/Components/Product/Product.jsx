@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
+import './Product.css'
 
 class Product extends Component { 
-    constructor() { 
-        super()
+    constructor(props) { 
+        super(props)
     }
+
 
     render() { 
         return (
-            <div>
-                <h1>This is my Product component</h1>
+            <div className='product'>
+                <div className='image'>
+                    <img src={this.props.imageURL} className = 'product-image' />
+                 </div>
+
+                <div className = 'name-price'>
+                        <h1>{this.props.name}</h1>
+                        <h3>{`$${this.props.price}`}</h3>
+                </div>
             </div>
         )
     }

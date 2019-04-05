@@ -1,0 +1,25 @@
+.form-wrapper {
+    width: 400px;
+    height: 500px;
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.form-picture {
+    height: 200px;
+    width: 200px;
+}
+
+.form-input {
+    width: 100%;
+}
+
+.form-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
