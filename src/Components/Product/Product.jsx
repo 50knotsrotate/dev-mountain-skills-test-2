@@ -1,29 +1,25 @@
 import React, { Component } from 'react'
 import './Product.css'
 
-class Product extends Component { 
-    constructor(props) { 
-        super(props)
-    }
 
 
-    render() { 
-        return (
-            <div className='product'>
-                <div className='image'>
-                    <img src={this.props.imageURL} className = 'product-image' />
-                 </div>
-
-                <div className = 'name-price'>
-                        <h1>{this.props.name}</h1>
-                        <h3>{`$${this.props.price}`}</h3>
-                    <button onClick={() => this.props.deleteItem(this.props.id)}>Delete</button>
-                </div>
-                {/* <div id='buttons'>
-                </div> */}
+export default function Product(props) { 
+    return (
+        <div className='product'>
+            <div className='image'>
+                <img src={props.imageURL} className='product-image' />
             </div>
-        )
-    }
-}
 
-export default Product
+            <div className='name-price'>
+                <h1>{props.name}</h1>
+                <h3>{`$${props.price}`}</h3>
+                <div id='buttons'>
+                    <button onClick={() => props.deleteItem(props.id)}>Delete</button>
+                    <button onClick={() => props.selectItem({ id: props.id, imageURL: props.imageURL, price: props.price, name: props.name })}>Edit</button>
+                </div>
+            </div>
+
+        </div>
+        
+    )
+}

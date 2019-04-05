@@ -12,7 +12,8 @@ class App extends Component {
       super()
 
       this.state = {
-        inventory: []
+        inventory: [],
+        selectedProduct: null
       }
       this.getProducts = this.getProducts.bind(this)
     }
@@ -20,6 +21,18 @@ class App extends Component {
   componentDidMount = () => { 
     this.getProducts()
       
+  }
+
+  edit = (obj) => { 
+    console.log('called')
+    axios.put(`/api/inventory/${obj.selectedProduct.id}?newText=${obj.productName}&price=${obj.price}&url=${obj.imageUrl}`)
+      .then(res => { 
+        this.setState({
+          inventory: res.data,
+          selectedProduct: null
+        })
+      })
+    
   }
   
   submit = item => { 
@@ -35,9 +48,17 @@ class App extends Component {
     axios.get('/api/inventory')
       .then(res => {
         this.setState({
-          inventory: res.data
+          inventory: res.data,
+          selectedProduct: null
         })
       }).catch(err => console.log(err))
+  }
+
+  selectItem = product => { 
+    this.setState({
+      selectedProduct: product
+    })
+
   }
     render(){
       return (
@@ -48,9 +69,13 @@ class App extends Component {
             <Dashboard
               getProducts={this.getProducts}
               inventory={this.state.inventory}
+              selectItem={this.selectItem}
+              
             />
           <Form
-            submitItem={this.submit}
+              submitItem={this.submit}
+              selectedProduct={this.state.selectedProduct}
+              edit={this.edit}
             />
             </div>
         </div>

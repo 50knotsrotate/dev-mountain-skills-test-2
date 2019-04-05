@@ -28,6 +28,7 @@ class Dashboard extends Component {
                 imageURL={product.url}
                 refreshList={this.props.getProducts}
                 deleteItem={this.deleteItem}
+                selectItem={this.props.selectItem}
             />
         })
 

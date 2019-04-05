@@ -22,5 +22,14 @@ module.exports = {
             .then(products => { 
                 res.status(200).send(products)
             })
+    },
+    editItem: (req, res) => { 
+        const { newText, price, url } = req.query;
+        const { id } = req.params
+        const db = req.app.get('db')
+        db.edit_item([id, newText, price, url])
+            .then(products => { 
+                res.status(200).send(products)
+            })
     }
 }
