@@ -4,6 +4,7 @@ import './App.css';
 import Dashboard from './Components/Dashboard/Dashboard'
 import Form from './Components/Form/Form'
 import Header from './Components/Header/Header'
+import axios from 'axios';
 
 class App extends Component {
  
@@ -13,14 +14,30 @@ class App extends Component {
       this.state = {
         inventory: []
       }
+      this.getProducts = this.getProducts.bind(this)
     }
   
+  componentDidMount = () => { 
+    this.getProducts()
+      
+  }
+  
   submit = item => { 
-    console.log(item)
-    let newInventory = [...this.state.inventory, item]
-    this.setState({
-      inventory: newInventory
-    })
+    axios.post('/api/inventory', item)
+      .then(res => { 
+        this.setState({
+          inventory: res.data
+        })
+      })
+  }
+
+  getProducts() { 
+    axios.get('/api/inventory')
+      .then(res => {
+        this.setState({
+          inventory: res.data
+        })
+      }).catch(err => console.log(err))
   }
     render(){
       return (
@@ -29,6 +46,7 @@ class App extends Component {
           <Header />
           <div className = 'dashboard-form'>
             <Dashboard
+              getProducts={this.getProducts}
               inventory={this.state.inventory}
             />
           <Form

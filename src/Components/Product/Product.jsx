@@ -17,7 +17,10 @@ class Product extends Component {
                 <div className = 'name-price'>
                         <h1>{this.props.name}</h1>
                         <h3>{`$${this.props.price}`}</h3>
+                    <button onClick={() => this.props.deleteItem(this.props.id)}>Delete</button>
                 </div>
+                {/* <div id='buttons'>
+                </div> */}
             </div>
         )
     }
